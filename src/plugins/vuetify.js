@@ -10,7 +10,9 @@ const MY_ICONS = {
   filter: 'mdi-filter-variant',
   ok: 'mdi-check-bold',
   mycancel: 'mdi-cancel',
-  alert: 'mdi-bell-alert'
+  alert: 'mdi-bell-alert',
+  dotsV: 'mdi-dots-vertical',
+  dotsH: 'mdi-dots-horizontal'
 }
 
 Vue.use(Vuetify);

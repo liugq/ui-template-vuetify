@@ -34,20 +34,22 @@ export default new Vuex.Store({
     appBar: {
       img: {
         display: true
-      }
+      },
+      color: ''
     },
     leftDrawer: {
       width: 256,
       img: {
         display: true
-      }
+      },
+      color: ''
     },
     /*废弃*/
     leftDrawerImg: {
       display: true
     },
     noLimit: {
-
+      enabled:false
     }
   },
   mutations: {},
