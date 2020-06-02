@@ -1,33 +1,26 @@
 <template>
   <div>
-    <v-img
-      :aspect-ratio="16 / 4"
-      :src="require('../assets/img/material.jpg')"
-      class="mb-1"
-    >
-      <v-row
-        class="lightbox pl-2 pt-2 pb-0 fill-height white--text"
-        align="end"
-        dense
-      >
+    <v-img :aspect-ratio="16 / 4"
+           :src="require('../assets/img/material.jpg')"
+           class="mb-1">
+      <v-row class="lightbox pl-2 pt-2 pb-0 fill-height white--text"
+             align="end"
+             dense>
         <v-col class="pb-0">
           <div class="title">Setting & Message</div>
           <div class="subtitle-2">系统设置与消息</div>
-          <v-tabs
-            background-color="transparent"
-            dense
-            v-model="tab"
-            class="pa-0 ma-0"
-            height="40"
-          >
-            <v-tab
-              v-for="item in tabItems"
-              :key="item.id"
-              :href="`#${item.id}`"
-              class="pa-0 ma-0"
-            >
-              <v-icon dense left>{{ item.icon }}</v-icon>
-              {{ item.text }}
+          <v-tabs background-color="transparent"
+                  dense
+                  v-model="tab"
+                  class="pa-0 ma-0"
+                  height="40">
+            <v-tab v-for="item in tabItems"
+                   :key="item.id"
+                   :href="`#${item.id}`"
+                   class="pa-0 ma-0">
+              <v-icon dense
+                      left>{{ item.icon }}</v-icon>
+              <span class="font-weight-bold">{{ item.text }}</span>
             </v-tab>
           </v-tabs>
         </v-col>
@@ -36,25 +29,20 @@
     <v-tabs-items v-model="tab">
       <v-tab-item value="Message">
         <v-content class="pa-1">
-          <v-data-iterator
-            :items="messages"
-            :items-per-page.sync="itemsPerPage"
-            :footer-props="{ itemsPerPageOptions }"
-            dense
-          >
+          <v-data-iterator :items="messages"
+                           :items-per-page.sync="itemsPerPage"
+                           :footer-props="{ itemsPerPageOptions }"
+                           dense>
             <template v-slot:default="{ items }">
-              <v-alert
-                transition="scale-transition"
-                dismissible
-                dense
-                elevation="1"
-                close-label="$delete"
-                v-for="(item, n) in items"
-                :key="n"
-                class="mb-2 pt-1 pb-1"
-                @input="al(item)"
-                >{{ item }}</v-alert
-              >
+              <v-alert transition="scale-transition"
+                       dismissible
+                       dense
+                       elevation="1"
+                       close-label="$delete"
+                       v-for="(item, n) in items"
+                       :key="n"
+                       class="mb-2 pt-1 pb-1"
+                       @input="al(item)">{{ item }}</v-alert>
             </template>
           </v-data-iterator>
         </v-content>
@@ -62,19 +50,26 @@
 
       <v-tab-item value="Setting">
         <v-content class="pa-1">
-          <v-subheader>样式设置</v-subheader>
+          <v-alert tile
+                   border="left"
+                   colored-border
+                   color="grey lighten-1"
+                   elevation="0"
+                   dense
+                   class="pt-0 pb-0 mb-1">
+            样式设置 Style Settings
+          </v-alert>
+          <v-divider></v-divider>
           <v-row>
             <v-col cols="6">
               <v-icon>mdi-invert-colors</v-icon>
               暗黑模式(Dark)
             </v-col>
             <v-col cols="6">
-              <v-switch
-                v-model="$vuetify.theme.dark"
-                class="mt-0 pt-0 float-right"
-                dense
-                hide-details
-              ></v-switch>
+              <v-switch v-model="$vuetify.theme.dark"
+                        class="mt-0 pt-0 float-right"
+                        dense
+                        hide-details></v-switch>
             </v-col>
           </v-row>
           <v-row>
@@ -83,72 +78,64 @@
               无界模式
             </v-col>
             <v-col cols="6">
-              <v-switch
-                v-model="noLimit.enabled"
-                class="mt-0 pt-0 float-right"
-                dense
-                hide-details
-              ></v-switch>
+              <v-switch v-model="noLimit.enabled"
+                        class="mt-0 pt-0 float-right"
+                        dense
+                        hide-details></v-switch>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="6">
-              <v-icon>mdi-image</v-icon>
+              <v-icon>mdi-application</v-icon>
               显示应用栏背景
             </v-col>
             <v-col cols="6">
-              <v-switch
-                v-model="appBar.img.display"
-                class="mt-0 pt-0 float-right"
-                dense
-                hide-details
-              ></v-switch>
+              <v-switch v-model="appBar.img.display"
+                        class="mt-0 pt-0 float-right"
+                        dense
+                        hide-details></v-switch>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="6">
-              <v-icon>mdi-image</v-icon>
+              <v-icon>mdi-application</v-icon>
+              应用栏颜色
+            </v-col>
+            <v-col cols="6"
+                   class="pt-0">
+              <v-select :items="colors"
+                        v-model="appBar.color"
+                        prepend-icon="mdi-format-color-fill"
+                        dense
+                        single-line
+                        hide-details></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6">
+              <v-icon>mdi-dock-left</v-icon>
               显示导航栏背景
             </v-col>
             <v-col cols="6">
-              <v-switch
-                v-model="leftDrawer.img.display"
-                class="mt-0 pt-0 float-right"
-                dense
-                hide-details
-              ></v-switch>
+              <v-switch v-model="leftDrawer.img.display"
+                        class="mt-0 pt-0 float-right"
+                        dense
+                        hide-details></v-switch>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col cols="6">
-              <v-icon>mdi-format-color-fill</v-icon>
-              应用栏颜色
-            </v-col>
-            <v-col cols="6" class="pt-0">
-              <v-select
-                :items="Colors"
-                v-model="appBar.color"
-                dense
-                single-line
-                hide-details
-              ></v-select>
-            </v-col>
-          </v-row>
-
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-format-color-fill</v-icon>
+              <v-icon>mdi-dock-left</v-icon>
               导航栏栏颜色
             </v-col>
-            <v-col cols="6" class="pt-0">
-              <v-select
-                :items="Colors"
-                v-model="leftDrawer.color"
-                dense
-                single-line
-                hide-details
-              ></v-select>
+            <v-col cols="6"
+                   class="pt-0">
+              <v-select :items="colors"
+                        v-model="leftDrawer.color"
+                        prepend-icon="mdi-format-color-fill"
+                        dense
+                        single-line
+                        hide-details></v-select>
             </v-col>
           </v-row>
 
@@ -158,19 +145,25 @@
               导航栏尺寸
             </v-col>
             <v-col col="6">
-              <v-slider
-                v-model="leftDrawer.width"
-                class="align-center"
-                :max="600"
-                :min="200"
-                thumb-label="always"
-                :thumb-size="24"
-              >
+              <v-slider v-model="leftDrawer.width"
+                        class="align-center"
+                        :max="600"
+                        :min="200"
+                        thumb-label="always"
+                        :thumb-size="24">
               </v-slider>
             </v-col>
           </v-row>
+          <v-alert tile
+                   border="left"
+                   colored-border
+                   color="grey lighten-1"
+                   elevation="0"
+                   dense
+                   class="pt-0 pb-0 mb-1">
+            页面信息 Page Info
+          </v-alert>
           <v-divider></v-divider>
-          <v-subheader>页面信息</v-subheader>
           <v-row>
             <v-col cols="6">
               <span class="pl-2">breakpoint</span>
@@ -192,7 +185,6 @@
               }}</span>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col cols="6">
               <span class="pl-2">width</span>
@@ -203,7 +195,6 @@
               }}</span>
             </v-col>
           </v-row>
-          <v-divider></v-divider>
         </v-content>
       </v-tab-item>
     </v-tabs-items>
@@ -219,7 +210,7 @@ export default {
       default: "Message"
     }
   },
-  data() {
+  data () {
     return {
       tab: "Message",
       tabItems: [
@@ -250,25 +241,24 @@ export default {
         "关于加强国庆节期间值班值守工作的通知",
         "关于转发《关于2019年度质量专业高级工程师资格评价考试有关问题的通知》的通知"
       ],
-      Colors: [
-        "none",
-        "primary",
-        "orange",
-        "yellow",
-        "green",
-        "blue",
-        "white"
+      colors: [{ text: "default", value: "" },
+      { text: "primary", value: "primary" },
+      { text: "orange", value: "orange" },
+      { text: "yellow", value: "yellow" },
+      { text: "green", value: "green" },
+      { text: "blue", value: "blue" },
+      { text: "white", value: "white" }
       ]
     }
   },
   watch: {
-    tabValue: function() {
+    tabValue: function () {
       this.tab = this.tabValue
       return this.tab
     }
   },
   methods: {
-    al: function(it) {
+    al: function (it) {
       // 真实环境应该读写数据库
       var index = this.messages.indexOf(it)
       console.log(index)
@@ -278,7 +268,7 @@ export default {
       this.$emit("update:message-count", this.messages.length)
     }
   },
-  mounted() {
+  mounted () {
     // console.log(this.$vuetify.breakpoint)
     this.$emit("update:message-count", this.messages.length)
   },

@@ -33,14 +33,14 @@ export default new Vuex.Store({
     },
     appBar: {
       img: {
-        display: true
+        display: false
       },
       color: ''
     },
     leftDrawer: {
       width: 256,
       img: {
-        display: true
+        display: false
       },
       color: ''
     },
