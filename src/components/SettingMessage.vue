@@ -10,7 +10,6 @@
           <div class="title">Setting & Message</div>
           <div class="subtitle-2">系统设置与消息</div>
           <v-tabs background-color="transparent"
-                  dense
                   v-model="tab"
                   class="pa-0 ma-0"
                   height="40">
@@ -18,8 +17,7 @@
                    :key="item.id"
                    :href="`#${item.id}`"
                    class="pa-0 ma-0">
-              <v-icon dense
-                      left>{{ item.icon }}</v-icon>
+              <v-icon left>{{ item.icon }}</v-icon>
               <span class="font-weight-bold">{{ item.text }}</span>
             </v-tab>
           </v-tabs>
@@ -52,14 +50,12 @@
         <v-content class="pa-1">
           <v-alert tile
                    border="left"
-                   colored-border
-                   color="grey lighten-1"
-                   elevation="0"
                    dense
-                   class="pt-0 pb-0 mb-1">
-            样式设置 Style Settings
+                   colored-border
+                   color="blue"
+                   class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
+            样式设置
           </v-alert>
-          <v-divider></v-divider>
           <v-row>
             <v-col cols="6">
               <v-icon>mdi-invert-colors</v-icon>
@@ -146,24 +142,24 @@
             </v-col>
             <v-col col="6">
               <v-slider v-model="leftDrawer.width"
-                        class="align-center"
                         :max="600"
                         :min="200"
+                        hide-details
+                        dense
                         thumb-label="always"
                         :thumb-size="24">
               </v-slider>
             </v-col>
           </v-row>
+          <v-divider></v-divider><br />
           <v-alert tile
                    border="left"
-                   colored-border
-                   color="grey lighten-1"
-                   elevation="0"
                    dense
-                   class="pt-0 pb-0 mb-1">
-            页面信息 Page Info
+                   colored-border
+                   color="blue"
+                   class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
+            页面信息
           </v-alert>
-          <v-divider></v-divider>
           <v-row>
             <v-col cols="6">
               <span class="pl-2">breakpoint</span>
@@ -195,6 +191,7 @@
               }}</span>
             </v-col>
           </v-row>
+          <v-divider></v-divider>
         </v-content>
       </v-tab-item>
     </v-tabs-items>
