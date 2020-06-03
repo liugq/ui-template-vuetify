@@ -1,49 +1,60 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../views/Login.vue'
 import NotFound from '../views/NotFound.vue'
+/* 
+import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-import Content from '../views/Content.vue'
+ import Content from '../views/Content.vue'
 import Lookup from '../views/lookup/Lookup.vue'
-
-import Account from '../views/account/Account.vue'
+import Account from '../views/account/Account.vue' 
+*/
 
 Vue.use(Router)
+
+const routes = [
+  {
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    children: [
+      {
+        path: '',
+        name: 'content',
+        component: () => import(/* webpackChunkName: "content" */ '../views/Content.vue')
+      },
+      {
+        path: 'lookup',
+        name: 'lookup',
+        component: () => import(/* webpackChunkName: "lookup" */ '../views/lookup/Lookup.vue')
+      },
+      {
+        path: 'account',
+        name: 'account',
+        /*component: Account*/
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "account" */ '../views/account/Account.vue')
+      }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+  },
+  {
+    path: '*',
+    component: NotFound
+  }
+]
 
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '/home',
-      component: Home,
-      children: [
-        {
-          path: '',
-          component: Content
-        },
-        {
-          path: 'lookup',
-          component: Lookup
-        },
-        {
-          path: 'account',
-          component: Account
-        }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '*',
-      component: NotFound
-    }
-  ]
+  routes
 })

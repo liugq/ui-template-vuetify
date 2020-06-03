@@ -39,7 +39,7 @@
                        close-label="$delete"
                        v-for="(item, n) in items"
                        :key="n"
-                       class="mb-2 pt-1 pb-1"
+                       class="mb-2 pt-1 pb-1 body-2"
                        @input="al(item)">{{ item }}</v-alert>
             </template>
           </v-data-iterator>
@@ -52,7 +52,7 @@
                    border="left"
                    dense
                    colored-border
-                   color="blue"
+                   color="blue lighten-1"
                    class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
             样式设置
           </v-alert>
@@ -101,7 +101,7 @@
                    class="pt-0">
               <v-select :items="colors"
                         v-model="appBar.color"
-                        prepend-icon="mdi-format-color-fill"
+                        class="mx-2"
                         dense
                         single-line
                         hide-details></v-select>
@@ -128,10 +128,9 @@
                    class="pt-0">
               <v-select :items="colors"
                         v-model="leftDrawer.color"
-                        prepend-icon="mdi-format-color-fill"
+                        class="mx-2"
                         dense
-                        single-line
-                        hide-details></v-select>
+                        single-line></v-select>
             </v-col>
           </v-row>
 
@@ -147,7 +146,7 @@
                         hide-details
                         dense
                         thumb-label="always"
-                        :thumb-size="24">
+                        :thumb-size="23">
               </v-slider>
             </v-col>
           </v-row>

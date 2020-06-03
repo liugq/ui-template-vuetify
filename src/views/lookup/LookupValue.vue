@@ -359,7 +359,7 @@ export default {
       immediate: false
     },
     lookupType: {
-      handler: function (val, oldVal) {
+      handler: function (val/*, oldVal*/) {
         if (val) {
           if (val.lookupTypeId && val.lookupTypeId !== -1) {
             this.lookupTypeInfo =
