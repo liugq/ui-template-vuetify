@@ -51,7 +51,7 @@
       <v-tab-item value="Setting">
         <v-card flat
                 tile
-                class="pa-2 body-2">
+                class="pa-3 body-2">
           <v-alert tile
                    border="left"
                    dense
@@ -60,38 +60,6 @@
                    class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
             样式设置
           </v-alert>
-          <v-list subheader>
-            <v-list-item :key="1"
-                         @click="null">
-              <v-list-item-icon>
-                <v-icon>mdi-invert-colors</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>暗黑模式(Dark)</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-switch v-model="$vuetify.theme.dark"
-                          class="mt-0 pt-0 float-right"
-                          dense
-                          hide-details></v-switch>
-              </v-list-item-action>
-            </v-list-item>
-            <v-list-item :key="2"
-                         @click="null">
-              <v-list-item-icon>
-                <v-icon>mdi-invert-colors</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>暗黑模式(Dark)2</v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-action>
-                <v-switch v-model="$vuetify.theme.dark"
-                          class="mt-0 pt-0 float-right"
-                          dense
-                          hide-details></v-switch>
-              </v-list-item-action>
-            </v-list-item>
-          </v-list>
           <v-row>
             <v-col cols="6">
               <v-icon>mdi-invert-colors</v-icon>
