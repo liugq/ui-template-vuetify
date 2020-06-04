@@ -26,7 +26,9 @@
     </v-img>
     <v-tabs-items v-model="tab">
       <v-tab-item value="Message">
-        <v-content class="pa-1">
+        <v-card flat
+                tile
+                class="pa-2">
           <v-data-iterator :items="messages"
                            :items-per-page.sync="itemsPerPage"
                            :footer-props="{ itemsPerPageOptions }"
@@ -43,11 +45,13 @@
                        @input="al(item)">{{ item }}</v-alert>
             </template>
           </v-data-iterator>
-        </v-content>
+        </v-card>
       </v-tab-item>
 
       <v-tab-item value="Setting">
-        <v-content class="pa-1">
+        <v-card flat
+                tile
+                class="pa-2 body-2">
           <v-alert tile
                    border="left"
                    dense
@@ -56,6 +60,38 @@
                    class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
             样式设置
           </v-alert>
+          <v-list subheader>
+            <v-list-item :key="1"
+                         @click="null">
+              <v-list-item-icon>
+                <v-icon>mdi-invert-colors</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>暗黑模式(Dark)</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-switch v-model="$vuetify.theme.dark"
+                          class="mt-0 pt-0 float-right"
+                          dense
+                          hide-details></v-switch>
+              </v-list-item-action>
+            </v-list-item>
+            <v-list-item :key="2"
+                         @click="null">
+              <v-list-item-icon>
+                <v-icon>mdi-invert-colors</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>暗黑模式(Dark)2</v-list-item-title>
+              </v-list-item-content>
+              <v-list-item-action>
+                <v-switch v-model="$vuetify.theme.dark"
+                          class="mt-0 pt-0 float-right"
+                          dense
+                          hide-details></v-switch>
+              </v-list-item-action>
+            </v-list-item>
+          </v-list>
           <v-row>
             <v-col cols="6">
               <v-icon>mdi-invert-colors</v-icon>
@@ -94,6 +130,18 @@
           </v-row>
           <v-row>
             <v-col cols="6">
+              <v-icon>mdi-dock-left</v-icon>
+              显示导航栏背景
+            </v-col>
+            <v-col cols="6">
+              <v-switch v-model="leftDrawer.img.display"
+                        class="mt-0 pt-0 float-right"
+                        dense
+                        hide-details></v-switch>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6">
               <v-icon>mdi-application</v-icon>
               应用栏颜色
             </v-col>
@@ -110,18 +158,6 @@
           <v-row>
             <v-col cols="6">
               <v-icon>mdi-dock-left</v-icon>
-              显示导航栏背景
-            </v-col>
-            <v-col cols="6">
-              <v-switch v-model="leftDrawer.img.display"
-                        class="mt-0 pt-0 float-right"
-                        dense
-                        hide-details></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-dock-left</v-icon>
               导航栏栏颜色
             </v-col>
             <v-col cols="6"
@@ -133,7 +169,6 @@
                         single-line></v-select>
             </v-col>
           </v-row>
-
           <v-row>
             <v-col col="6">
               <v-icon>mdi-move-resize-variant</v-icon>
@@ -145,7 +180,7 @@
                         :min="200"
                         hide-details
                         dense
-                        thumb-label="always"
+                        thumb-label
                         :thumb-size="23">
               </v-slider>
             </v-col>
@@ -159,7 +194,7 @@
                    class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
             页面信息
           </v-alert>
-          <v-row>
+          <v-row dense>
             <v-col cols="6">
               <span class="pl-2">breakpoint</span>
             </v-col>
@@ -169,8 +204,7 @@
               }}</span>
             </v-col>
           </v-row>
-
-          <v-row>
+          <v-row dense>
             <v-col cols="6">
               <span class="pl-2">height</span>
             </v-col>
@@ -180,7 +214,7 @@
               }}</span>
             </v-col>
           </v-row>
-          <v-row>
+          <v-row dense>
             <v-col cols="6">
               <span class="pl-2">width</span>
             </v-col>
@@ -191,7 +225,7 @@
             </v-col>
           </v-row>
           <v-divider></v-divider>
-        </v-content>
+        </v-card>
       </v-tab-item>
     </v-tabs-items>
   </div>
