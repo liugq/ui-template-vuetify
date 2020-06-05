@@ -29,20 +29,25 @@
         <v-card flat
                 tile
                 class="pa-2">
+
           <v-data-iterator :items="messages"
                            :items-per-page.sync="itemsPerPage"
                            :footer-props="{ itemsPerPageOptions }"
                            dense>
+
             <template v-slot:default="{ items }">
-              <v-alert transition="scale-transition"
-                       dismissible
-                       dense
-                       elevation="1"
-                       close-label="$delete"
-                       v-for="(item, n) in items"
-                       :key="n"
-                       class="mb-2 pt-1 pb-1 body-2"
-                       @input="al(item)">{{ item }}</v-alert>
+              <v-hover v-for="(item, n) in items"
+                       :key="n">
+                <template v-slot="{ hover }">
+                  <v-alert transition="scale-transition"
+                           dismissible
+                           dense
+                           :elevation="hover ? 16 : 1"
+                           close-label="$delete"
+                           class="mb-2 pt-1 pb-1 body-2"
+                           @input="al(item)">{{ item }}</v-alert>
+                </template>
+              </v-hover>
             </template>
           </v-data-iterator>
         </v-card>
@@ -57,139 +62,169 @@
                    dense
                    colored-border
                    color="blue lighten-1"
-                   class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
+                   class="py-0 mb-1 blue--text text--lighten-1 font-weight-bold">
             样式设置
           </v-alert>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-invert-colors</v-icon>
-              暗黑模式(Dark)
-            </v-col>
-            <v-col cols="6">
-              <v-switch v-model="$vuetify.theme.dark"
-                        class="mt-0 pt-0 float-right"
-                        dense
-                        hide-details></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-border-none-variant</v-icon>
-              无界模式
-            </v-col>
-            <v-col cols="6">
-              <v-switch v-model="noLimit.enabled"
-                        class="mt-0 pt-0 float-right"
-                        dense
-                        hide-details></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-application</v-icon>
-              显示应用栏背景
-            </v-col>
-            <v-col cols="6">
-              <v-switch v-model="appBar.img.display"
-                        class="mt-0 pt-0 float-right"
-                        dense
-                        hide-details></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-dock-left</v-icon>
-              显示导航栏背景
-            </v-col>
-            <v-col cols="6">
-              <v-switch v-model="leftDrawer.img.display"
-                        class="mt-0 pt-0 float-right"
-                        dense
-                        hide-details></v-switch>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-application</v-icon>
-              应用栏颜色
-            </v-col>
-            <v-col cols="6"
-                   class="pt-0">
-              <v-select :items="colors"
-                        v-model="appBar.color"
-                        class="mx-2"
-                        dense
-                        single-line
-                        hide-details></v-select>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6">
-              <v-icon>mdi-dock-left</v-icon>
-              导航栏栏颜色
-            </v-col>
-            <v-col cols="6"
-                   class="pt-0">
-              <v-select :items="colors"
-                        v-model="leftDrawer.color"
-                        class="mx-2"
-                        dense
-                        single-line></v-select>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col col="6">
-              <v-icon>mdi-move-resize-variant</v-icon>
-              导航栏尺寸
-            </v-col>
-            <v-col col="6">
-              <v-slider v-model="leftDrawer.width"
-                        :max="600"
-                        :min="200"
-                        hide-details
-                        dense
-                        thumb-label
-                        :thumb-size="23">
-              </v-slider>
-            </v-col>
-          </v-row>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-invert-colors</v-icon>
+                  暗黑模式(Dark)
+                </v-col>
+                <v-col cols="6">
+                  <v-switch v-model="$vuetify.theme.dark"
+                            class="mt-0 pt-0 float-right"
+                            dense
+                            hide-details></v-switch>
+                </v-col>
+              </v-row>
+            </template>
+          </v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-border-none-variant</v-icon>
+                  无界模式
+                </v-col>
+                <v-col cols="6">
+                  <v-switch v-model="noLimit.enabled"
+                            class="mt-0 pt-0 float-right"
+                            dense
+                            hide-details></v-switch>
+                </v-col>
+              </v-row>
+            </template>
+          </v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-application</v-icon>
+                  显示应用栏背景
+                </v-col>
+                <v-col cols="6">
+                  <v-switch v-model="appBar.img.display"
+                            class="mt-0 pt-0 float-right"
+                            dense
+                            hide-details></v-switch>
+                </v-col>
+              </v-row>
+            </template></v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-dock-left</v-icon>
+                  显示导航栏背景
+                </v-col>
+                <v-col cols="6">
+                  <v-switch v-model="leftDrawer.img.display"
+                            class="mt-0 pt-0 float-right"
+                            dense
+                            hide-details></v-switch>
+                </v-col>
+              </v-row>
+            </template></v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-application</v-icon>
+                  应用栏颜色
+                </v-col>
+                <v-col cols="6"
+                       class="pt-0">
+                  <v-select :items="colors"
+                            v-model="appBar.color"
+                            class="mx-2"
+                            dense
+                            single-line
+                            hide-details></v-select>
+                </v-col>
+              </v-row>
+            </template></v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col cols="6">
+                  <v-icon>mdi-dock-left</v-icon>
+                  导航栏栏颜色
+                </v-col>
+                <v-col cols="6"
+                       class="pt-0">
+                  <v-select :items="colors"
+                            v-model="leftDrawer.color"
+                            class="mx-2"
+                            dense
+                            single-line
+                            hide-details></v-select>
+                </v-col>
+              </v-row>
+            </template></v-hover>
+          <v-hover>
+            <template v-slot="{ hover }">
+              <v-row :class="`elevation-${hover ? 4 : 0}`">
+                <v-col col="6">
+                  <v-icon>mdi-move-resize-variant</v-icon>
+                  导航栏尺寸
+                </v-col>
+                <v-col col="6">
+                  <v-slider v-model="leftDrawer.width"
+                            :max="600"
+                            :min="200"
+                            hide-details
+                            dense
+                            thumb-label
+                            :thumb-size="23">
+                  </v-slider>
+                </v-col>
+              </v-row>
+            </template></v-hover>
           <v-divider></v-divider><br />
           <v-alert tile
                    border="left"
                    dense
                    colored-border
                    color="blue"
-                   class="py-0 my-0 blue--text text--lighten-1 font-weight-bold">
+                   class="py-0 mb-1 blue--text text--lighten-1 font-weight-bold">
             页面信息
           </v-alert>
           <v-row dense>
             <v-col cols="6">
-              <span class="pl-2">breakpoint</span>
+              <span class="pl-2">Breakpoint</span>
             </v-col>
             <v-col cols="6">
-              <span class="float-right pr-2">{{
+              <v-chip link
+                      class="float-right pr-2"
+                      small> {{
                 this.$vuetify.breakpoint.name
-              }}</span>
+              }} </v-chip>
             </v-col>
           </v-row>
           <v-row dense>
             <v-col cols="6">
-              <span class="pl-2">height</span>
+              <span class="pl-2">Height</span>
             </v-col>
             <v-col cols="6">
-              <span class="float-right pr-2">{{
+              <v-chip link
+                      class="float-right pr-2"
+                      small> {{
                 this.$vuetify.breakpoint.height
-              }}</span>
+              }} </v-chip>
             </v-col>
           </v-row>
           <v-row dense>
             <v-col cols="6">
-              <span class="pl-2">width</span>
+              <span class="pl-2">Width</span>
             </v-col>
             <v-col cols="6">
-              <span class="float-right pr-2">{{
+              <v-chip link
+                      class="float-right pr-2"
+                      small> {{
                 this.$vuetify.breakpoint.width
-              }}</span>
+              }} </v-chip>
             </v-col>
           </v-row>
           <v-divider></v-divider>
