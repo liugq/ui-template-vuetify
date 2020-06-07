@@ -1,11 +1,9 @@
 <template>
   <v-list dense>
-    <v-list-item
-      v-for="item in menu_items"
-      :key="item.title"
-      link
-      :to="item.url"
-    >
+    <v-list-item v-for="item in menu_items"
+                 :key="item.title"
+                 link
+                 :to="item.url">
       <v-list-item-icon>
         <v-icon dense>{{ item.icon }}</v-icon>
       </v-list-item-icon>
@@ -19,12 +17,13 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       menu_items: [
         { title: 'Home', icon: 'mdi-home-city', url: '/' },
         { title: 'Look Up', icon: 'mdi-view-list', url: '/home/lookup' },
         { title: 'Account', icon: 'mdi-account-group', url: '/home/account' },
+        { title: 'AccountCard', icon: 'mdi-account-group', url: '/home/accountcard' },
         { title: 'Login', icon: 'mdi-login', url: '/login' }
       ]
     }
