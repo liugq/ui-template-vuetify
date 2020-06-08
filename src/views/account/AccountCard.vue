@@ -36,7 +36,7 @@
             <v-hover v-slot:default="{ hover }">
               <div>
                 <v-card :elevation="hover ? 24 : 2"
-                        @click="edit(item)"
+                        @click.stop="edit(item)"
                         v-show="editAccountId !== item.accountId"
                         :class="{'animate__animated animate__flipInY':currentAccountId === item.accountId}">
                   <v-img :src="item.accountAvatar"></v-img>
@@ -223,7 +223,7 @@ export default {
       editAccountId: -1,
       disabled: false,
       currentAccount: null, // { accountId: -1 }
-      currentAccountBak: null,
+      currentAccountBak: {},
       valid: true
     }
   },
@@ -244,8 +244,9 @@ export default {
     edit: function (item) {
       this.currentAccountId = item.accountId
       this.editAccountId = item.accountId
-      //Object.assign(this.currentAccountBak, item)
-      //console.log(this.currentAccountId)
+      console.log(item)
+      Object.assign(this.currentAccountBak, item)
+      console.log(this.currentAccountBak)
     },
     cancel: function (item) {
       this.editAccountId = -1
