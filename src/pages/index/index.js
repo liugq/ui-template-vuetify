@@ -8,6 +8,10 @@ import axios from 'axios'
 import qs from 'qs'
 import schema from 'async-validator'
 
+import animated from 'animate.css' // npm install animate.css --save安装，再引入
+
+Vue.use(animated)
+
 schema.warning = function () { } // 取消async-validator的warn信息
 
 Vue.config.productionTip = false
