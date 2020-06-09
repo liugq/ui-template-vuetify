@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-img :aspect-ratio="16 / 4"
-           :src="require('../assets/img/material.jpg')"
+           src="/static/img/material.jpg"
            class="mb-1">
       <v-row class="lightbox pl-2 pt-2 pb-0 fill-height white--text"
              align="end"

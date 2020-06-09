@@ -1,7 +1,7 @@
 <template>
   <v-list-item dense>
     <v-list-item-avatar class="mt-1 mb-1">
-      <v-img :src="require('../assets/img/liuxy.jpg')" />
+      <v-img src="/static/img/liuxy.jpg" />
     </v-list-item-avatar>
     <!-- 当前职责 -->
     <v-list-item-content>

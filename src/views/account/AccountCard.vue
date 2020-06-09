@@ -82,19 +82,19 @@
                       <v-text-field v-model="item.loginName"
                                     :disabled="disabled"
                                     label="登陆账号"
-                                    placeholder="登陆账号"
+                                    prepend-icon="mdi-shield-account"
                                     :rules="fieldRules.loginName"
                                     dense></v-text-field>
                       <v-text-field v-model="item.accountName"
                                     :disabled="disabled"
-                                    label="账号名"
-                                    placeholder="账号名"
+                                    label="姓名"
+                                    prepend-icon="mdi-account"
                                     :rules="fieldRules.accountName"
                                     dense></v-text-field>
                       <v-text-field v-model="item.description"
                                     :disabled="disabled"
                                     label="描述"
-                                    placeholder="描述信息"
+                                    prepend-icon="mdi-file-document"
                                     dense></v-text-field>
                       <v-file-input v-model="files"
                                     :disabled="disabled"
@@ -126,6 +126,7 @@
                                 :disabled="disabled"
                                 :true-value="1"
                                 :false-value="-1"
+                                prepend-icon="mdi-toggle-switch-off-outline"
                                 single-line
                                 dense
                                 hide-details
@@ -155,6 +156,14 @@
         </v-row>
       </template>
     </v-data-iterator>
+    <v-btn fab
+           absolute
+           bottom
+           right
+           color="primary"
+           class="mb-10 mr-4">
+      <v-icon fab>$plus</v-icon>
+    </v-btn>
   </div>
 </template>
 <script>

@@ -16,7 +16,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"
                           color="blue"></v-app-bar-nav-icon>
       <v-toolbar-title class="headline text-uppercase font-weight-bold">
-        <v-img :src="require('../assets/img/tsingtao-logo.png')"></v-img>
+        <v-img src="/static/img/logo/logo.png"></v-img>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon
