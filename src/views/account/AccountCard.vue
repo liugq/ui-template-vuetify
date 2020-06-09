@@ -153,17 +153,70 @@
               </div>
             </v-hover>
           </v-col>
+          <v-col cols="12"
+                 sm="4"
+                 md="2"
+                 lg="2">
+            <v-card flat
+                    color="transparent">
+              <v-card-text>
+                <div>
+                  <v-btn fab
+                         absolute
+                         bottom
+                         left
+                         color="primary"
+                         @click.stop="addDialog.dialog = true">
+                    <v-icon fab>$plus</v-icon>
+                  </v-btn>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
         </v-row>
       </template>
     </v-data-iterator>
-    <v-btn fab
-           absolute
-           bottom
-           right
-           color="primary"
-           class="mb-10 mr-4">
-      <v-icon fab>$plus</v-icon>
-    </v-btn>
+    <!-- 新增用户对话框 -->
+    <v-dialog v-model="addDialog.dialog"
+              max-width="500px">
+      <v-card>
+        <v-card-title>
+          <v-icon left>mdi-account</v-icon>{{addDialog.title}}
+        </v-card-title>
+        <v-card-text>
+          <v-form ref="addForm"
+                  v-model="AddFormValid">
+            <v-text-field v-model="addAccount.loginName"
+                          :disabled="disabled"
+                          label="登陆账号"
+                          prepend-icon="mdi-shield-account"
+                          :rules="fieldRules.loginName"></v-text-field>
+            <v-text-field v-model="addAccount.accountName"
+                          :disabled="disabled"
+                          label="姓名"
+                          prepend-icon="mdi-account"
+                          :rules="fieldRules.accountName"></v-text-field>
+            <v-text-field v-model="addAccount.description"
+                          :disabled="disabled"
+                          label="描述"
+                          prepend-icon="mdi-file-document"></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1"
+                 text
+                 @click.stop="addDialog.dialog = false">
+            <v-icon left>$mycancel</v-icon>取消
+          </v-btn>
+          <v-btn color="blue darken-1"
+                 text
+                 @click="handleAddSave(-1, addAccount)">
+            <v-icon left>$ok</v-icon>确定
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -183,60 +236,58 @@ export default {
   data () {
     return {
       keyWord: '用户列表',
+      /* --Crud需要用到的 Url,具体实例要实现 */
       urlMap: {
         getUrl: '/login/account/',
         postUrl: '/login/account/',
         putUrl: '/login/account/',
         deleteUrl: '/login/account/'
-      } /* --Crud需要用到的 Url,具体实例要实现 */,
-      headersAll: [
-        {
-          text: 'ID',
-          align: 'left',
-          sortable: false,
-          value: 'lookupTypeId',
-          width: 100,
-          show: true
-        },
-        { text: '类型名', value: 'lookupTypeName', show: true },
-        { text: '状态', value: 'status', width: 80, show: true },
-        { text: '描述', value: 'description', show: true },
-        {
-          text: '操作',
-          value: 'action',
-          sortable: false,
-          width: 100,
-          show: true
-        }
-      ],
+      },
+      /* --字段async-validator的验证规则*/
       rules: {
-        lookupTypeName: [
-          { required: true, message: '值列表类型名不能为空', trigger: 'blur' },
-          { min: 3, max: 10, message: '用户名长度为3-10' }
+        accountId: [{ required: true, message: '账号ID不能为空' }],
+        loginName: [
+          { required: true, message: '登录账号不能为空', trigger: 'blur' },
+          { min: 3, max: 20, message: '登录账号长度为3-20' }
         ],
-        description: [
-          { required: true, message: '描述不能为空', trigger: 'blur' },
-          { min: 10, max: 30, message: '描述长度为10-30' }
+        accountName: [
+          { required: true, message: '账号名不能为空', trigger: 'blur' },
+          { min: 2, max: 30, message: '账号名长度为10-30' }
         ]
       },
+      /* --字段 vuetify默认使用的验证规则 */
+      fieldRules: {},
+      valid: false,
+      AddFormValid: false,
+
       files: [],
       uploadFiles: [],
       formData: null,
       multiple: true,
-      fieldRules: {},
       options: {},
-      delDialog: { dialog: false, title: '删除' },
+      /* 新增的用户绑定到改对象 */
+      addAccount: {
+        accountId: -1,
+        accountName: '',
+        loginName: '',
+        description: ''
+      },
+      addDialog: { dialog: false, title: '新增用户' },
       dialog: false,
+
       formTitle: '创建值列表类型',
       currentAccountId: -1,
       editAccountId: -1,
       disabled: false,
       currentAccount: null, // { accountId: -1 }
-      currentAccountBak: {},
-      valid: true
+      currentAccountBak: {}
+
     }
   },
   mounted: function () {
+    //async-validator 验证规则 转换为 vuetify默认使用的规则，便于vuetify使用
+    this.asyncValidatorToVuetifyValidator(this.rules, this.fieldRules)
+    //获取数据列表
     this.getDataList(this.page.pageSize, this.page.currentPage)
   },
   watch: {
