@@ -189,16 +189,19 @@
             <v-text-field v-model="addAccount.loginName"
                           :disabled="disabled"
                           label="登陆账号"
+                          dense
                           prepend-icon="mdi-shield-account"
                           :rules="fieldRules.loginName"></v-text-field>
             <v-text-field v-model="addAccount.accountName"
                           :disabled="disabled"
                           label="姓名"
+                          dense
                           prepend-icon="mdi-account"
                           :rules="fieldRules.accountName"></v-text-field>
             <v-text-field v-model="addAccount.description"
                           :disabled="disabled"
                           label="描述"
+                          dense
                           prepend-icon="mdi-file-document"></v-text-field>
           </v-form>
         </v-card-text>
@@ -211,7 +214,7 @@
           </v-btn>
           <v-btn color="blue darken-1"
                  text
-                 @click="handleAddSave(-1, addAccount)">
+                 @click="handleAddSave(null, addAccount)?addDialog.dialog = false:''">
             <v-icon left>$ok</v-icon>确定
           </v-btn>
         </v-card-actions>
@@ -235,7 +238,7 @@ export default {
   },
   data () {
     return {
-      keyWord: '用户列表',
+      keyWord: '用户',
       /* --Crud需要用到的 Url,具体实例要实现 */
       urlMap: {
         getUrl: '/login/account/',

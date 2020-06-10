@@ -118,7 +118,7 @@ export const mixinQuery = {
       }
     },
     /* 查询按钮处理方法 */
-    handleQuery: function (queryForm) {
+    handleQuery: function (/*queryForm*/) {
       this.getDataList(this.page.pageSize, this.page.currentPage)
     },
     /* 分页改变 */
@@ -174,16 +174,13 @@ export const mixinQuery = {
               }
             })
             .then(function (res) {
+              console.log(res)
               _self.editRowIndex = -1
+              /* 重新加载数据 */
               _self.getDataList(
                 _self.page.pageSize,
                 _self.page.currentPage
-              ) /* 重新加载数据 */
-              /* _self.$message({
-              showClose: true,
-              message: '编辑 ' + _self.keyWord + ' 信息成功!' + _msg,
-              type: 'success'
-            }) */
+              )
               Object.assign(_self.$store.state.snackbarOption, {
                 color: 'success',
                 snackbar: true,
@@ -194,16 +191,13 @@ export const mixinQuery = {
           _self.$http
             .put(_self.PUT, _self.$qs.stringify(row))
             .then(function (res) {
+              console.log(res)
               _self.editRowIndex = -1
+              /* 重新加载数据 */
               _self.getDataList(
                 _self.page.pageSize,
                 _self.page.currentPage
-              ) /* 重新加载数据 */
-              /* _self.$message({
-              showClose: true,
-              message: '编辑 ' + _self.keyWord + ' 信息成功!' + _msg,
-              type: 'success'
-            }) */
+              )
               Object.assign(_self.$store.state.snackbarOption, {
                 color: 'success',
                 snackbar: true,
@@ -216,7 +210,7 @@ export const mixinQuery = {
     /* $$增加行处理方法，在行末出现添加行，需要向appendData数组添加数据，如：this.appendData.push({}) */
     handleAddPre: function () { },
     /* 删除当前添加行 处理方法 */
-    handleAddDel: function (index, row) {
+    handleAddPost: function (index/*, row*/) {
       // 清理掉当前行对应的数据
       this.appendData.splice(index, 1)
     },
@@ -228,13 +222,19 @@ export const mixinQuery = {
      */
     handleAddSave: function (index, row, msg, isJson) {
       const _self = this
+      let _result = false
+
       let validator = new _self.$schema(_self.rules)
       validator.validate(row, (errors, fields) => {
-        // let _msg = ' [ ' + (!!msg ? msg : index + 1) + ' ] '
-        let _msg = '[ #: *' + (index + 1) + ' ' + (msg || '') + ' ]'
+        let _msg = msg && msg.trim().length() > 0 ? ' ' + msg : ''
+
+        /* 判断index 是否是数字 是：true，否：false*/
+        if (typeof index === 'number' && !isNaN(index)) {
+          _msg = '[ #: *' + (index + 1) + ' ' + (msg || '') + ' ]'
+        }
         // let _msg = msg && msg.trim().length() > 0 ? ' ' + msg : ''
         if (errors) {
-          return handleErrors(
+          handleErrors(
             errors,
             fields,
             '新增' + _self.keyWord + '信息错误! ' + _msg,
@@ -243,6 +243,8 @@ export const mixinQuery = {
             _msg +
             ' ]' */ _self
           )
+          _result = false
+          return _result
         }
         // validation passed
         if (isJson) {
@@ -253,13 +255,10 @@ export const mixinQuery = {
               }
             })
             .then(function (res) {
-              _self.handleAddDel(index, row)
+              console.log(res)
+              _result = true
+              _self.handleAddPost(index)
               _self.getDataList(_self.page.pageSize, _self.page.currentPage)
-              /* _self.$message({
-              showClose: true,
-              message: '新增' + _self.keyWord + '信息成功! [ #: *' + (index + 1) + _msg + ' ]',
-              type: 'success'
-            }) */
               Object.assign(_self.$store.state.snackbarOption, {
                 color: 'success',
                 snackbar: true,
@@ -270,13 +269,11 @@ export const mixinQuery = {
           _self.$http
             .post(_self.POST, _self.$qs.stringify(row))
             .then(function (res) {
-              _self.handleAddDel(index, row)
+              console.log(123)
+              console.log(res)
+              _result = true
+              _self.handleAddPost(index)
               _self.getDataList(_self.page.pageSize, _self.page.currentPage)
-              /* _self.$message({
-              showClose: true,
-              message: '新增' + _self.keyWord + '信息成功! [ #: *' + (index + 1) + _msg + ' ]',
-              type: 'success'
-            }) */
               Object.assign(_self.$store.state.snackbarOption, {
                 color: 'success',
                 snackbar: true,
@@ -285,13 +282,14 @@ export const mixinQuery = {
             })
         }
       })
+      return _result
     },
     /* 全数据索引 */
     indexGlobal: function (index) {
       return (this.page.currentPage - 1) * this.page.pageSize + index + 1
     },
     /* 单选处理方法 */
-    handleCurrentRowChange: function (currentRow, oldRow) {
+    handleCurrentRowChange: function (currentRow/*, oldRow*/) {
       this.singleSelection = currentRow
     },
     /* 多选处理方法 */
@@ -307,11 +305,7 @@ export const mixinQuery = {
     handleDelete: function (id, delDialog) {
       const _self = this
       _self.$http.delete(_self.DELETE + id).then(function (res) {
-        /* self.$message({
-            showClose: true,
-            message: '删除 1 条' + _self.keyWord + ' 数据成功!',
-            type: 'success'
-          }) */
+        console.log(res)
         Object.assign(_self.$store.state.snackbarOption, {
           color: 'success',
           snackbar: true,
@@ -339,6 +333,7 @@ export const mixinQuery = {
         } else {
           ret = true
         }
+        console.log(fields)
       })
       return ret
     },
@@ -352,7 +347,8 @@ export const mixinQuery = {
       vuetifyValidatorRules
     ) {
       for (const field in asyncValidatorRules) {
-        if (asyncValidatorRules.hasOwnProperty(field)) {
+        /*if (asyncValidatorRules.hasOwnProperty(field)) 新版本的ESLint使用了禁止直接调用 Object.prototypes 的内置属性开关*/
+        if (Object.prototype.hasOwnProperty.call(asyncValidatorRules, field)) {
           const rule = asyncValidatorRules[field]
           vuetifyValidatorRules[field] = [
             v => this.fieldValidator({ field: v }, { field: rule })
