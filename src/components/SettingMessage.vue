@@ -227,6 +227,18 @@
               }} </v-chip>
             </v-col>
           </v-row>
+          <v-row dense>
+            <v-col cols="6">
+              <span class="pl-2">Theme</span>
+            </v-col>
+            <v-col cols="6">
+              <v-chip link
+                      class="float-right pr-2"
+                      small> {{
+                this.$vuetify.theme.dark
+              }} </v-chip>
+            </v-col>
+          </v-row>
           <v-divider></v-divider>
         </v-card>
       </v-tab-item>
