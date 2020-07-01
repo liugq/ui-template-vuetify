@@ -4,54 +4,78 @@
            class="mx-1">
       <v-col cols="12"
              sm="12"
-             md="6"
+             md="3"
              xs="12">
-        <v-card>
-          <v-img class="white--text align-end"
-                 :aspect-ratio="21 / 6"
-                 src="https://picsum.photos/1920/1080?random">
-            <v-card-title>Random Photo</v-card-title>
-          </v-img>
-
-          <v-card-subtitle class="pb-0">Random Photo</v-card-subtitle>
-
-          <v-card-text class="text--primary">
-            <div>https://picsum.photos/1920/1080?random</div>
-          </v-card-text>
-        </v-card>
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 12 : 2">
+            <div class="d-flex justify-space-between pa-2">
+              <div>
+                <div class="subtitle-1">本月累计销量</div>
+                <div><span class="text-h4 font-weight-bold">20,407</span> <span>KL</span> </div>
+              </div>
+              <div class="align-self-end subtitle-1">
+                <div>同期占比为 2.2%</div>
+                <div>预算完成率为 2.1%</div>
+              </div>
+            </div>
+            <v-divider></v-divider>
+            <v-card-text class="pa-2">
+              同期占比为 2.2%， 预算完成率为 2.1%
+            </v-card-text>
+          </v-card>
+        </v-hover>
       </v-col>
       <v-col cols="12"
              sm="12"
-             md="6"
+             md="3"
              xs="12">
-        <v-card>
-          <v-img class="white--text align-end"
-                 :aspect-ratio="21 / 6"
-                 src="/static/img/tea.jpg">
-            <v-card-title>Tea</v-card-title>
-          </v-img>
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 12 : 2">
 
-          <v-card-subtitle class="pb-0">Tea</v-card-subtitle>
-
-          <v-card-text class="text--primary">
-            <div>Tea</div>
-          </v-card-text>
-        </v-card>
+            <v-card-title class="pa-2">本月累计销量</v-card-title>
+            <v-card-text class="pa-2">
+              <div class="text-center"> <span class="text-h4 font-weight-bold">20,407</span> <span>KL</span> </div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-text class="pa-2">
+              同期占比为 2.2%， 预算完成率为 2.1%
+            </v-card-text>
+          </v-card>
+        </v-hover>
       </v-col>
-
       <v-col cols="12"
              sm="12"
-             md="2"
+             md="3"
              xs="12">
-        <v-card>
-          <v-img src="/static/img/fu.png">
-          </v-img>
-          <v-card-title>童子拜佛</v-card-title>
-          <v-card-subtitle>童子拜佛</v-card-subtitle>
-          <v-card-text class="text--primary">
-            观音菩萨妙身现,杨柳净瓶救苦难
-          </v-card-text>
-        </v-card>
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 12 : 2">
+            <v-card-title class="pa-2">2020年06月销量</v-card-title>
+            <v-card-text class="pa-2">
+              <div class="text-center"> <span class="text-h4 font-weight-bold">109万</span> <span>KL</span> </div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-text class="pa-2">
+              当月增量 16,266 千升，当月增长率 1.5% ，当月预算完成率 98.9%
+            </v-card-text>
+          </v-card>
+        </v-hover>
+      </v-col>
+      <v-col cols="12"
+             sm="12"
+             md="3"
+             xs="12">
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 12 : 2">
+            <v-card-title class="pa-2">2020年01-06月月销量</v-card-title>
+            <v-card-text class="pa-2">
+              <div class="text-center"> <span class="text-h4 font-weight-bold">440万</span> <span>KL</span> </div>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-text class="pa-2">
+              累计增量 -333,992 千升，累计增长率 -7.1% ，累计预算完成率 89.8%
+            </v-card-text>
+          </v-card>
+        </v-hover>
       </v-col>
 
       <v-col cols="12"
