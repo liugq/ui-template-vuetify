@@ -10,17 +10,26 @@
           <v-card :elevation="hover ? 12 : 2">
             <div class="d-flex justify-space-between pa-2">
               <div>
-                <div class="subtitle-1">本月累计销量</div>
-                <div><span class="text-h4 font-weight-bold">20,407</span> <span>KL</span> </div>
+                <div class="grey--text lighten-3">
+                  <v-icon class="grey--text lighten-3">mdi-chart-bar</v-icon>
+                  <span style="vertical-align: middle;"
+                        class="ml-1">本月累计销量</span>
+                </div>
+                <div class="py-2">
+                  <span class="text-h3 font-weight-bold red--text">
+                    20,407
+                  </span>
+                  <span>KL</span>
+                </div>
               </div>
-              <div class="align-self-end subtitle-1">
-                <div>同期占比为 2.2%</div>
-                <div>预算完成率为 2.1%</div>
+              <div class="align-self-end subtitle-2 py-2 grey--text lighten-3">
+                <div><span>同期占比为</span><span class="float-right  pl-2">2.2%</span></div>
+                <div><span>预算完成率为</span><span class="float-right  pl-2">2.1%</span></div>
               </div>
             </div>
             <v-divider></v-divider>
             <v-card-text class="pa-2">
-              同期占比为 2.2%， 预算完成率为 2.1%
+              备注
             </v-card-text>
           </v-card>
         </v-hover>
@@ -31,14 +40,29 @@
              xs="12">
         <v-hover v-slot:default="{ hover }">
           <v-card :elevation="hover ? 12 : 2">
-
-            <v-card-title class="pa-2">本月累计销量</v-card-title>
-            <v-card-text class="pa-2">
-              <div class="text-center"> <span class="text-h4 font-weight-bold">20,407</span> <span>KL</span> </div>
-            </v-card-text>
+            <div class="d-flex justify-space-between pa-2">
+              <div>
+                <div class="grey--text lighten-3">
+                  <v-icon class="grey--text lighten-3">mdi-chart-areaspline</v-icon>
+                  <span style="vertical-align: middle;"
+                        class="ml-1">2020年06月销量</span>
+                </div>
+                <div class="py-2">
+                  <span class="text-h3 font-weight-bold green--text">
+                    109万
+                  </span>
+                  <span>KL</span>
+                </div>
+              </div>
+              <div class="align-self-end subtitle-2 py-2 grey--text lighten-3">
+                <div><span>当月增量</span><span class="float-right  pl-2">16,266 kl</span></div>
+                <div><span>当月增长率</span><span class="float-right  pl-2">1.5%</span></div>
+                <div><span>当月预算完成率</span><span class="float-right  pl-2">98.9%</span></div>
+              </div>
+            </div>
             <v-divider></v-divider>
             <v-card-text class="pa-2">
-              同期占比为 2.2%， 预算完成率为 2.1%
+              备注
             </v-card-text>
           </v-card>
         </v-hover>
@@ -49,30 +73,29 @@
              xs="12">
         <v-hover v-slot:default="{ hover }">
           <v-card :elevation="hover ? 12 : 2">
-            <v-card-title class="pa-2">2020年06月销量</v-card-title>
-            <v-card-text class="pa-2">
-              <div class="text-center"> <span class="text-h4 font-weight-bold">109万</span> <span>KL</span> </div>
-            </v-card-text>
+            <div class="d-flex justify-space-between pa-2">
+              <div>
+                <div class="grey--text lighten-3">
+                  <v-icon class="grey--text lighten-3">mdi-chart-bell-curve-cumulative</v-icon>
+                  <span style="vertical-align: middle;"
+                        class="ml-1">2020年01-06月月销量</span>
+                </div>
+                <div class="py-2">
+                  <span class="text-h3 font-weight-bold orange--text">
+                    448万
+                  </span>
+                  <span>KL</span>
+                </div>
+              </div>
+              <div class="align-self-end subtitle-2 py-2 grey--text lighten-3">
+                <div><span>累计增量</span><span class="float-right  pl-2">-333,992 kl</span></div>
+                <div><span>累计增长率</span><span class="float-right  pl-2">-7.1%</span></div>
+                <div><span>累计预算完成率</span><span class="float-right pl-2">89.8%</span></div>
+              </div>
+            </div>
             <v-divider></v-divider>
             <v-card-text class="pa-2">
-              当月增量 16,266 千升，当月增长率 1.5% ，当月预算完成率 98.9%
-            </v-card-text>
-          </v-card>
-        </v-hover>
-      </v-col>
-      <v-col cols="12"
-             sm="12"
-             md="3"
-             xs="12">
-        <v-hover v-slot:default="{ hover }">
-          <v-card :elevation="hover ? 12 : 2">
-            <v-card-title class="pa-2">2020年01-06月月销量</v-card-title>
-            <v-card-text class="pa-2">
-              <div class="text-center"> <span class="text-h4 font-weight-bold">440万</span> <span>KL</span> </div>
-            </v-card-text>
-            <v-divider></v-divider>
-            <v-card-text class="pa-2">
-              累计增量 -333,992 千升，累计增长率 -7.1% ，累计预算完成率 89.8%
+              备注
             </v-card-text>
           </v-card>
         </v-hover>
